@@ -1,8 +1,9 @@
 # cafeteria-django-HanaAlec
 
+## INITIALISATION
 ## Pour relancer un projet 
 
-Pour activer l'env + lancer VSCode
+Pour activer l'env virtuel + lancer VSCode
 ```
 student@D261-PC5-Ubuntu24:~/cafeteria-django-HanaAlec$ source venv/bin/activate
 (venv) student@D261-PC5-Ubuntu24:~/cafeteria-django-HanaAlec$ code .
@@ -10,7 +11,7 @@ student@D261-PC5-Ubuntu24:~/cafeteria-django-HanaAlec$ source venv/bin/activate
 
 ![alt text](img/restart_project.png)
 
-## Ebauche d'organigramme (sur dbdiagramme.io)
+## PREMIERE SEANCE : ébauche d'organigramme (sur dbdiagramme.io)
 
 ```
 Table Student {
@@ -41,3 +42,9 @@ Table Transaction {
   date datetime
 }
 ```
+## Deuxième séance : 31/03/2026
+
+Organigramme modifié (suppression de la classe "Group" pour un choix de roles et classe "student" changé pour "user")
+Création des templates
+Ajout des produits de la cafet
+
