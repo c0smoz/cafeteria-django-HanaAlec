@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Cafétéria{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Cafétéria</a>
+            <!-- Menu -->
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}
+    <script>
+    function confirmDelete() {
+        return confirm('Êtes-vous sûr de vouloir supprimer ?');
+    }
+
+    // Simple client-side live search/filter helper
+    function initLiveSearch(inputSelector, itemSelector) {
+        const input = document.querySelector(inputSelector);
+        if (!input) return;
+        input.addEventListener('input', () => {
+            const q = input.value.trim().toLowerCase();
+            document.querySelectorAll(itemSelector).forEach(el => {
+                const text = el.textContent.toLowerCase();
+                el.style.display = text.includes(q) ? '' : 'none';
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize live search for the users list if present
+        initLiveSearch('#user-search', 'ul li');
+    });
+    </script>
+    {% endblock %}
+</body>
+</html>

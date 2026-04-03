@@ -1,0 +1,38 @@
+/* cafeteria_app static stylesheet
+   - Place custom CSS here
+   - Loaded after Bootstrap so you can override Bootstrap variables and classes
+   - Keep selectors scoped when possible to avoid conflicts
+*/
+
+/* Basic body styling */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: #f8f9fa; /* light gray, complements Bootstrap */
+  color: #212529;
+}
+
+/* Navbar tweaks */
+.navbar-brand {
+  font-weight: 600;
+}
+
+/* Container spacing */
+.container.mt-4 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Product list cards (example) */
+.product-card {
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  background: #ffffff;
+}
+
+/* Small responsive helper */
+@media (max-width: 576px) {
+  .product-card { padding: 0.5rem; }
+}
+
+/* End of custom styles */

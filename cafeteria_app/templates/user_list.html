@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Utilisateurs</h1>
+  <a href="{% url 'user_add' %}">Ajouter un utilisateur</a>
+  <ul>
+    {% for u in users %}
+      <li>{{ u.name }} — {{ u.email }} — {{ u.credit }} €
+        [<a href="{% url 'user_edit' u.pk %}">modifier</a>]
+        [<a href="{% url 'user_delete' u.pk %}">supprimer</a>]
+      </li>
+    {% empty %}
+      <li>Aucun utilisateur.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
