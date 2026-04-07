@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, User
 from .forms import UserForm
 
-@login_required
+# @login_required
 def home(request):
     products = Product.objects.filter(available=True).order_by('name')
     users = User.objects.order_by('name')

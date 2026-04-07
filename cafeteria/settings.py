@@ -42,6 +42,17 @@ INSTALLED_APPS = [
     'import_export',
 ]
 
+CAS_SERVER_URL = 'https://identites.ensea.fr/cas/'
+CAS_VERSION = '3'
+# CAS_LOGIN_URL_NAME = 'cas_ng_login'
+# CAS_LOGOUT_URL_NAME = 'cas_ng_logout'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
+)
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -50,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_cas_ng.middleware.CASMiddleware'
 ]
 
 ROOT_URLCONF = 'cafeteria.urls'
@@ -119,15 +131,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
-)
 
-LOGIN_URL = 'cas_ng_login'
-LOGIN_REDIRECT_URL = 'cafeteria_app:home'
-LOGOUT_REDIRECT_URL = 'cas_ng_logout'
+# LOGIN_URL = 'cas_ng_login'
+# LOGIN_REDIRECT_URL = 'cafeteria_app:home'
+# LOGOUT_REDIRECT_URL = 'cas_ng_logout'
 
-CAS_SERVER_URL = 'https://identites.ensea.fr/cas/'
-CAS_LOGIN_URL_NAME = 'cas_ng_login'
-CAS_LOGOUT_URL_NAME = 'cas_ng_logout'

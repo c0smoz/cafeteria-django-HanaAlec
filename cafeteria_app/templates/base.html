@@ -32,10 +32,11 @@
                 {% if user.is_authenticated %}
                     <div class="d-flex align-items-center">
                         <span class="me-3">Bonjour, <strong>{{ user.get_full_name|default:user.username }}</strong></span>
-                        <form method="post" action="{% url 'cas_ng_logout' %}" class="mb-0">
+                        <a class="btn btn-outline-secondary btn-sm" href="{% url 'cas_ng_logout' %}">Déconnexion</a>
+                        <!-- <form method="post" action="{% url 'cas_ng_logout' %}" class="mb-0">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-secondary btn-sm">Déconnexion</button>
-                        </form>
+                        </form> -->
                     </div>
                 {% else %}
                     <a class="btn btn-primary btn-sm" href="{% url 'cas_ng_login' %}">Connexion</a>
