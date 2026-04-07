@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <section class="home-hero mb-5">
+        <div class="home-hero__copy">
+            <p class="home-kicker mb-2">Menu du jour</p>
+            <h1 class="mb-3">Les produits disponibles</h1>
+            <p class="text-muted mb-0">
+                Clique sur un produit pour afficher son prix.
+                {% if selected_user %}
+                    Les tarifs tiennent compte du compte sélectionné.
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="home-account card shadow-sm border-0">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Mon compte</h2>
+                {% if users %}
+                    <form method="get" class="d-flex flex-column gap-2">
+                        <label class="form-label mb-0" for="account-select">Choisir un compte</label>
+                        <select id="account-select" name="account" class="form-select" onchange="this.form.submit()">
+                            {% for account in users %}
+                                <option value="{{ account.pk }}"{% if selected_user and account.pk == selected_user.pk %} selected{% endif %}>
+                                    {{ account.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <noscript><button type="submit" class="btn btn-primary btn-sm">Voir</button></noscript>
+                    </form>
+
+                    {% if selected_user %}
+                        <div class="account-summary mt-3">
+                            <div><strong>{{ selected_user.name }}</strong></div>
+                            <div class="text-muted">{{ selected_user.email }}</div>
+                            <div class="mt-2">Crédit: {{ selected_user.credit|floatformat:2 }} €</div>
+                            <div>Cotisant: {% if selected_user.is_subscriber %}Oui{% else %}Non{% endif %}</div>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <p class="text-muted mb-0">Ajoute d'abord un utilisateur pour afficher son historique.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <div class="menu-grid">
+            {% for product in products %}
+                <article class="menu-card">
+                    {% cycle 'img/CaféAllongé.jpeg' 'img/Cannette.jpeg' 'img/Chips.jpeg' 'img/Espresso.jpeg' 'img/Panini4fromages.jpeg' 'img/PaniniKebab.jpeg' 'img/Sandwich.jpeg' 'img/Thé.jpeg' as menu_image silent %}
+                    <div class="menu-card__media">
+                        <img src="{% static menu_image %}" alt="{{ product.name }}" class="menu-card__image">
+                    </div>
+                    <div class="menu-card__body">
+                        <h2 class="h5 mb-2">{{ product.name }}</h2>
+                        <button
+                            class="btn btn-outline-dark btn-sm"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#price-{{ product.pk }}"
+                            aria-expanded="false"
+                            aria-controls="price-{{ product.pk }}"
+                        >
+                            Voir le prix
+                        </button>
+                        <div class="collapse mt-3" id="price-{{ product.pk }}">
+                            <div class="menu-card__price">
+                                <div>Prix normal: {{ product.price|floatformat:2 }} €</div>
+                                {% if selected_user and selected_user.is_subscriber and product.has_subscriber_discount %}
+                                    <div class="text-success">Prix cotisant: {{ product.subscriber_price|floatformat:2 }} €</div>
+                                {% endif %}
+                            </div>
+                            {% if selected_user and selected_user.is_subscriber and product.has_subscriber_discount %}
+                                <div class="small text-muted mt-2">
+                                    Réduction cotisant appliquée pour {{ selected_user.name }}.
+                                </div>
+                            {% elif product.has_subscriber_discount %}
+                                <div class="small text-muted mt-2">
+                                    Tarif cotisant disponible après sélection d'un compte cotisant.
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% empty %}
+                <div class="alert alert-light border">Aucun produit disponible pour le moment.</div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <p class="home-kicker mb-1">Historique</p>
+                <h2 class="h3 mb-0">Transactions du compte</h2>
+            </div>
+            {% if selected_user %}
+                <span class="badge text-bg-dark">{{ selected_user.name }}</span>
+            {% endif %}
+        </div>
+
+        {% if selected_user %}
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    {% if transactions %}
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix payé</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in transactions %}
+                                        <tr>
+                                            <td>{{ transaction.product.name }}</td>
+                                            <td>{{ transaction.paid_price|floatformat:2 }} €</td>
+                                            <td>{{ transaction.date|date:"d/m/Y H:i" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">Aucune transaction pour ce compte pour le moment.</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-light border mb-0">Aucun compte disponible.</div>
+        {% endif %}
+    </section>
+{% endblock %}

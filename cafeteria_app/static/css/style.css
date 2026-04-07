@@ -1,38 +1,127 @@
-/* cafeteria_app static stylesheet
-   - Place custom CSS here
-   - Loaded after Bootstrap so you can override Bootstrap variables and classes
-   - Keep selectors scoped when possible to avoid conflicts
-*/
-
-/* Basic body styling */
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background-color: #f8f9fa; /* light gray, complements Bootstrap */
-  color: #212529;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background: #f5f5f5;
+  color: #222;
 }
 
-/* Navbar tweaks */
 .navbar-brand {
+  font-weight: 600;
+  color: #222;
+}
+
+.nav-link {
+  color: #444;
+}
+
+.nav-link:hover {
+  color: #000;
+}
+
+.container.mt-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.home-kicker {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: #666;
   font-weight: 600;
 }
 
-/* Container spacing */
-.container.mt-4 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-/* Product list cards (example) */
-.product-card {
-  border: 1px solid rgba(0,0,0,0.05);
+.home-hero__copy {
+  background: #fff;
+  border: 1px solid #ddd;
   border-radius: 0.5rem;
-  padding: 0.75rem;
-  background: #ffffff;
+  padding: 1.5rem;
 }
 
-/* Small responsive helper */
+.home-account {
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.menu-card {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: none;
+}
+
+.menu-card__media {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #eee;
+}
+
+.menu-card__image {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-card__body {
+  padding: 1.25rem;
+}
+
+.menu-card__body h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.menu-card__price {
+  padding: 0.85rem 1rem;
+  border-radius: 0.35rem;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+}
+
+.card {
+  border-radius: 0.5rem;
+  border-color: #ddd !important;
+  box-shadow: none !important;
+}
+
+.btn-primary,
+.btn-outline-dark,
+.btn-outline-secondary {
+  border-radius: 0.35rem;
+}
+
+footer,
+header {
+  background: #fff !important;
+}
+
 @media (max-width: 576px) {
-  .product-card { padding: 0.5rem; }
+  .menu-card__media {
+    min-height: 140px;
+  }
 }
 
-/* End of custom styles */
+@media (max-width: 992px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+  }
+}

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cas_ng',
     'cafeteria_app',
 ]
 
@@ -116,3 +117,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
+)
+
+LOGIN_URL = 'cas_ng_login'
+LOGIN_REDIRECT_URL = 'cafeteria_app:home'
+LOGOUT_REDIRECT_URL = 'cas_ng_logout'
+
+CAS_SERVER_URL = 'https://identites.ensea.fr/cas/'
+CAS_LOGIN_URL_NAME = 'cas_ng_login'
+CAS_LOGOUT_URL_NAME = 'cas_ng_logout'

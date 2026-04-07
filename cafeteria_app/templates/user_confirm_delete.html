@@ -5,6 +5,6 @@
   <form method="post">
     {% csrf_token %}
     <button type="submit">Supprimer</button>
-    <a href="{% url 'user_list' %}">Annuler</a>
+  <a href="{% url 'cafeteria_app:user_list' %}">Annuler</a>
   </form>
 {% endblock %}

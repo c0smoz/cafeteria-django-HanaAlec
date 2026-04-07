@@ -47,6 +47,13 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+
+    @property
+    def subscriber_price(self):
+        """Retourne le prix cotisant si la réduction s'applique."""
+        if self.has_subscriber_discount:
+            return max(0, self.price - 0.50)
+        return self.price
     
     class Meta:
         ordering = ['name']
@@ -59,6 +66,10 @@ class Transaction(models.Model):
     
     def __str__(self):
         return f"{self.user.name} - {self.product.name} ({self.date.date()})"
+
+    @property
+    def paid_price(self):
+        return self.user.get_product_price(self.product)
     
     class Meta:
         ordering = ['-date']

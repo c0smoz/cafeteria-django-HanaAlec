@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h1 class="h4 mb-3">Connexion</h1>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger">Nom d'utilisateur ou mot de passe incorrect.</div>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ form.password.id_for_label }}">Mot de passe</label>
+                            {{ form.password }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        {% url 'cas_ng_login' as cas_login_url %}
+                        {% if cas_login_url %}
+                            <a href="{{ cas_login_url }}">Connexion via le CAS ENSEA</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

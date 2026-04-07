@@ -65,4 +65,11 @@ Questions d'analyse :
     Comment Django valide-t-il les données côté serveur ?
     Que se passe-t-il si le formulaire n'est pas valide (données non conforme au type défini dans le modèle) ?
 
+## Quatrième séance : 07/04/2026
+Questions d'analyse :
+
+    Quels sont les avantages d'utiliser un template pré-conçu par rapport à coder le HTML/CSS from scratch ?
+    Comment Django gère-t-il les fichiers statiques en développement vs production ?
+    Pourquoi est-il important de placer les images dans le bon dossier ?
+
 
